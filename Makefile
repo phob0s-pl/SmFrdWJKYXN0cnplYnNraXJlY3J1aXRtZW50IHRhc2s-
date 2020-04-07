@@ -3,10 +3,12 @@
 all: tests weatherllo
 
 weatherllo:
+	@gqlgen
 	@go build ./cmd/weatherllo
 
 tests:
 	go test -v ./owm
 
-tests:
-	go test -v ./graphql
+clean:
+	rm -fr model
+	rm -f graphql/generated.go
