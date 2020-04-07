@@ -2,6 +2,7 @@ package owm
 
 import (
 	"encoding/json"
+	"errors"
 	"io"
 	"io/ioutil"
 )
@@ -25,13 +26,13 @@ type ApiReply struct {
 		TempMax   float64 `json:"temp_max"`
 		Pressure  float64 `json:"pressure"`
 		Humidity  float64 `json:"humidity"`
-		SeaLevel  int     `json:"sea_level"`
-		GrndLevel int     `json:"grnd_level"`
+		SeaLevel  float64 `json:"sea_level"`
+		GrndLevel float64 `json:"grnd_level"`
 	} `json:"main"`
 	Visibility float64 `json:"visibility"`
 	Wind       struct {
 		Speed float64 `json:"speed"`
-		Deg   int     `json:"deg"`
+		Deg   float64 `json:"deg"`
 	} `json:"wind"`
 	Rain struct {
 		OneH   float64 `json:"1h"`
@@ -58,6 +59,11 @@ type ApiReply struct {
 	Cod      int    `json:"cod"`
 }
 
+type ApiReplyError struct {
+	Cod     int    `json:"cod"`
+	Message string `json:"message"`
+}
+
 func decodeReply(r io.Reader) (*ApiReply, error) {
 	ret := &ApiReply{}
 
@@ -71,4 +77,19 @@ func decodeReply(r io.Reader) (*ApiReply, error) {
 	}
 
 	return ret, nil
+}
+
+func decodeError(r io.Reader) error {
+	ret := &ApiReplyError{}
+
+	data, err := ioutil.ReadAll(r)
+	if err != nil {
+		return err
+	}
+
+	if err := json.Unmarshal(data, ret); err != nil {
+		return err
+	}
+
+	return errors.New(ret.Message)
 }
