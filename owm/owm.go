@@ -1,6 +1,7 @@
 package owm
 
 import (
+	"github.com/patrickmn/go-cache"
 	"time"
 )
 

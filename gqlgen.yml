@@ -8,10 +8,6 @@ model:
   filename: model/model.go
   package: model
 
-resolver:
-  filename: graphql/generated_resolver.go
-  type: Resolver
-
 models:
   OpenWeatherMap:
     fields:
