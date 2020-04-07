@@ -2,11 +2,13 @@ package owm
 
 import (
 	"github.com/patrickmn/go-cache"
+	"github.com/phob0s-pl/weatherllo/model"
 	"time"
 )
 
 const (
-	apiUrl = ""
+	apiHost = "api.openweathermap.org"
+	apiPath = "/data/2.5/weather"
 )
 
 type OpenWeatherMap struct {
@@ -17,6 +19,12 @@ type OpenWeatherMap struct {
 
 	// token is openweathermap.org access token
 	token string
+}
+
+type CityInput struct {
+	City  string
+	Lang  *model.Lang
+	Units *model.Units
 }
 
 func New(token string) *OpenWeatherMap {
@@ -40,8 +48,4 @@ func (o *OpenWeatherMap) City(name string) ([]byte, error) {
 
 func (o *OpenWeatherMap) apiCall(url string) ([]byte, error) {
 	return nil, nil
-}
-
-func (o *OpenWeatherMap) lang() {
-
 }
