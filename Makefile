@@ -1,12 +1,14 @@
-.PHONY: all weatherllo tests docker release clean
+.PHONY: all weatherllo tests docker release clean gqlgen
 
-all: tests weatherllo
+all: gqlgen tests weatherllo
 
-weatherllo:
+gqlgen:
 	@gqlgen
+
+weatherllo: gqlgen
 	@go build ./cmd/weatherllo
 
-tests:
+tests: gqlgen
 	go test -v ./owm
 
 clean:
