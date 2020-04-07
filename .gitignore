@@ -1,1 +1,3 @@
 /.idea
+/model/model.go
+/graphql/generated.go
