@@ -18,6 +18,10 @@ const (
 	debugFlag = "debug"
 )
 
+const (
+	envTokenKey = "TOKEN"
+)
+
 func listen(cmd *cobra.Command, args []string) {
 	initializeLogger()
 	log.WithField("version", owm.Version).Info("starting application")
@@ -25,6 +29,10 @@ func listen(cmd *cobra.Command, args []string) {
 	token, err := cmd.Flags().GetString(tokenFlag)
 	if err != nil {
 		log.WithField("error", err).Fatal("failed to parse flags")
+	}
+
+	if envTokenValue := os.Getenv(envTokenKey); envTokenValue != "" {
+		token = envTokenValue
 	}
 
 	addr, err := cmd.Flags().GetString(addrFlag)
