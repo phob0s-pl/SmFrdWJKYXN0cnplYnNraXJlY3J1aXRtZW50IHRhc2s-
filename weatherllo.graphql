@@ -1,0 +1,152 @@
+type Query {
+    """
+    ping returns pong response from the endpoint if connection is successful
+    """
+    ping: String!
+
+    """
+    openweathermap obtains weather information from openweathermap.org
+    """
+    openweathermap(input: OpenWeatherMapInput): OpenWeatherMap!
+}
+
+type OpenWeatherMap {
+    """
+    cities as argument takes array of cities and returns weather information
+    """
+    cities(input: [String!]!): [Weather!]
+}
+
+input OpenWeatherMapInput {
+    language: Lang!
+    """
+    supported units: metric, imperial. When you do not use units parameter, format is Standard by default
+    """
+    units: Units!
+}
+
+type Weather {
+    city: String!
+    general: GeneralWeather!
+    clouds: Clouds!
+    rain: Rain!
+    snow: Snow!
+    wind: Wind!
+    sunrise: Sunrise!
+}
+
+type GeneralWeather {
+    """
+    Group of weather parameters
+    """
+    main: String!
+    """
+    Weather condition within the group
+    """
+    description: String!
+    """
+    minimal temperature
+    """
+    temparature_min: Float!
+    """
+    Maximum temperature
+    """
+    temparature_max: Float!
+    """
+    This temperature parameter accounts for the human perception of weather.
+    """
+    temparature_feel: Float!
+    """
+    Atmospheric pressure
+    """
+    pressure: Float!
+    """
+    Humidity, %
+    """
+    humidity: Float!
+    """
+    Atmospheric pressure on the sea level, hPa
+    """
+    pressure_sea_level: Float!
+    """
+    Atmospheric pressure on the ground level, hPa
+    """
+    pressure_grnd_level: Float!
+}
+
+type Clouds {
+    cloudiness: Float!
+}
+
+type Wind {
+    speed: Float!
+    degree: Float!
+}
+
+type Snow {
+    snow1h: Float!
+    snow3h: Float!
+}
+
+type Rain {
+    rain1h: Float!
+    rain3h: Float!
+}
+
+type Sunrise {
+    Sunrise: String!
+    Sunset: String!
+}
+
+enum Units {
+    METRIC
+    IMPERIAL
+}
+
+enum Lang {
+    AFRIKAANS
+    ARABIC
+    AZERBAIJANI
+    BULGARIAN
+    CATALAN
+    CZECH
+    DANISH
+    GERMAN
+    GREEK
+    ENGLISH
+    BASQUE
+    PERSIAN
+    FINNISH
+    FRENCH
+    GALICIAN
+    HEBREW
+    HINDI
+    CROATIAN
+    HUNGARIAN
+    INDONESIAN
+    ITALIAN
+    JAPANESE
+    KOREAN
+    LATVIAN
+    LITHUANIAN
+    MACEDONIAN
+    NORWEGIAN
+    DUTCH
+    POLISH
+    PORTUGUESE
+    BRASIL_PORTUGUES
+    ROMANIAN
+    RUSSIAN
+    SWEDISH
+    SLOVAK
+    SLOVENIAN
+    SPANISH
+    SERBIAN
+    THAI
+    TURKISH
+    UK
+    VIETNAMESE
+    CHINESE_SIMPLIFIED
+    CHINESE_TRADITIONAL
+    ZULU
+}

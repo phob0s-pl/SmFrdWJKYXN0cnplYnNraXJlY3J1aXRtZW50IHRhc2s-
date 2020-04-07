@@ -1,0 +1,19 @@
+schema:
+  - weatherllo.graphql
+
+exec:
+  filename: graphql/generated.go
+
+model:
+  filename: graphql/model.go
+  package: graphql
+
+resolver:
+  filename: graphql/generated_resolver.go
+  type: Resolver
+
+models:
+  OpenWeatherMap:
+    fields:
+      cities:
+        resolver: true
