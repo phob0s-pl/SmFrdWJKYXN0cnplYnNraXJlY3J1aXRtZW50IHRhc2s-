@@ -15,6 +15,8 @@ type OpenWeatherMap {
     cities as argument takes array of cities and returns weather information
     """
     cities(input: [String!]!): [Weather!]
+    language: Lang
+    units: Units
 }
 
 input OpenWeatherMapInput {
@@ -27,6 +29,7 @@ input OpenWeatherMapInput {
 
 type Weather {
     city: String!
+    description: [WeatherDescription!]!
     general: GeneralWeather!
     clouds: Clouds!
     rain: Rain!
@@ -35,7 +38,7 @@ type Weather {
     sunrise: Sunrise!
 }
 
-type GeneralWeather {
+type WeatherDescription {
     """
     Group of weather parameters
     """
@@ -44,6 +47,9 @@ type GeneralWeather {
     Weather condition within the group
     """
     description: String!
+}
+
+type GeneralWeather {
     """
     minimal temperature
     """
