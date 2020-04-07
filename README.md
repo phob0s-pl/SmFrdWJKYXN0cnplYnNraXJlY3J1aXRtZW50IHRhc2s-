@@ -2,10 +2,13 @@
  - Improve test coverage
  - cache is not distinguishing units and language
  - documentation
+ - dockerfile improvements: security hardening: run as user, use smaller base image, keeping in mind ca-certificates must be installed
+ - discuss if error only should be returned when one of cities provided fails or data + error
+ - provide metrics with API calls counter
 
 # running with docker
 ```bash
-docker run --rm -p 8081:8080 -e TOKEN="<TOKEN VALUE>" weatherllo:latest
+docker run --rm -p 8081:8080 -e TOKEN="<TOKEN VALUE>" phob0spl/weatherllo:latest
 ```
 
 Then visit following address for 

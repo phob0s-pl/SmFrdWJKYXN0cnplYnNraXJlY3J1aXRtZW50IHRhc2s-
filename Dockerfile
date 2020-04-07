@@ -18,6 +18,6 @@ RUN apt-get update && apt-get install -y ca-certificates
 
 COPY --from=builder /weatherllo /weatherllo
 
-EXPOSE 80/tcp
+EXPOSE 8080/tcp
 
-ENTRYPOINT ["/weatherllo", "listen"]
+ENTRYPOINT ["/weatherllo", "listen", "--debug"]
