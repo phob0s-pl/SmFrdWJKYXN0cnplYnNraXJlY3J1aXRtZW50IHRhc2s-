@@ -5,8 +5,8 @@ exec:
   filename: graphql/generated.go
 
 model:
-  filename: graphql/model.go
-  package: graphql
+  filename: model/model.go
+  package: model
 
 resolver:
   filename: graphql/generated_resolver.go
